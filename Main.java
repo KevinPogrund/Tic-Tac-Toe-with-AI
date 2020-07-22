@@ -1,35 +1,24 @@
 package tictactoe;
+
 import java.util.*;
 
 public class Main {
     final static Scanner scan = new Scanner(System.in);
     static String[][] board = new String[3][3];
-    static int xs = 0;
-    static int os = 0;
+    static boolean user = true;//this detmines if it is the user or computer turn
+
 
     public static void main(String[] args) {
-        System.out.print("Enter cells: ");
-        String[] s = scan.next().split("");
-        int count = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (s[count].equals("_") == false) {
-                    board[j][i] = s[count];
-                } else {
-                    board[j][i] = " ";
-                }
-                if (s[count].equals("X")) {
-                    xs++;
-                } else if (s[count].equals("O")) {
-                    os++;
-                }
-                count++;
+                board[j][i] = " ";//populate a blank board
             }
         }
         printBoard();
-        ask();
+        userInput();
     }
 
+    //print the board in the correct format
     public static void printBoard() {
         System.out.println("---------");
         for (int i = 0; i < 3; i++) {
@@ -42,42 +31,35 @@ public class Main {
         System.out.println("---------");
     }
 
-    public static void ask() {
+    //ask for the user input
+    public static void userInput() {
         try {
             System.out.print("Enter the coordinates: ");
             int x = scan.nextInt();
             int y = scan.nextInt();
-            if (x > 3 || y > 3) {
+            if (x > 3 || y > 3) {//checks the range of the input
                 System.out.println("Coordinates should be from 1 to 3!");
-                ask();
+                userInput();
             } else {
-                place(x, y);
+                user = false; //makes the next turn a computer turn
+                x--;
+                y = Math.abs(y - 3);//converts the user input into how the board is mapped in the array
+                if (board[x][y].equals(" ") == false) {
+                    System.out.println("This cell is occupied! Choose another one!");
+                    userInput();
+                } else {
+                    board[x][y] = "X";
+                    printBoard();
+                    check();
+                }
             }
         } catch (Exception e) {
             System.out.println("You should enter numbers!");
-            scan.nextLine();
-            ask();
+            scan.nextLine();//NB - stops a continuous loop
+            userInput();
         }
     }
 
-    public static void place(int x, int y) {
-        x--;
-        y = Math.abs(y - 3);
-        if (board[x][y].equals(" ") == false) {
-            System.out.println("This cell is occupied! Choose another one!");
-            ask();
-        } else {
-            if (xs == os) {
-                board[x][y] = "X";
-                xs++;
-            } else {
-                board[x][y] = "O";
-                os++;
-            }
-            printBoard();
-            check();
-        }
-    }
 
     public static void check() {
         String res = "-";
@@ -116,12 +98,31 @@ public class Main {
                 if (done) {
                     System.out.println("Draw");
                 } else {
-                    System.out.println("Game not finished");
+                    if (user) {
+                        userInput();
+                    } else {
+                        easy_play();
+                    }
                 }
                 break;
             default:
                 System.out.println(res + " wins");
                 break;
+        }
+    }
+
+    public static void easy_play() {
+        Random r = new Random();
+        int x = r.nextInt(3);
+        int y = r.nextInt(3);
+        if (board[y][x].equals(" ")) {//checks if it is a blank space
+            board[y][x] = "O";
+            System.out.println("Making move level \"easy\"");
+            printBoard();
+            user = true;
+            check();
+        } else {
+            easy_play();
         }
     }
 }
