@@ -40,12 +40,9 @@ public class User extends Player {
         } catch (Exception e) {
             System.out.println("You should enter numbers!");
             //s.nextLine();//NB - stops a continuous loop
-            getInput(board);
+            int[] loop = getInput(board);
+            return loop;
         }
-
-       /* int[] r = new int[]{1, 1};
-        return r;*/
-        return null;
     }
 
 }
