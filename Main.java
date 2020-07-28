@@ -116,6 +116,9 @@ public class Main {
                 case "easy":
                     player1 = new EasyAi("X");
                     break;
+                case "medium":
+                    player1 = new MediumAi("X");
+                    break;
                 default:
                     System.out.println("bad parameters!");
                     start();
@@ -127,6 +130,9 @@ public class Main {
                     break;
                 case "easy":
                     player2 = new EasyAi("O");
+                    break;
+                case "medium":
+                    player2 = new MediumAi("O");
                     break;
                 default:
                     System.out.println("bad parameters!");

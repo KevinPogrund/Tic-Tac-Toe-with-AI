@@ -26,4 +26,22 @@ public class EasyAi extends Player {
         }
         return board;
     }
+//this is for when it is called by medium a1 (copy and pasted, added int for overloading)
+    public String[][] play(String[][] board, int k){
+        Random r = new Random();
+        int x = r.nextInt(3);
+        int y = r.nextInt(3);
+        if (board[y][x].equals(" ")) {//checks if it is a blank space
+            board[y][x] = type;
+           /* try {
+                Thread.sleep(800);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+            return board;
+        } else {
+            play(board);
+        }
+        return board;
+    }
 }
