@@ -11,7 +11,6 @@ public class MediumAi extends EasyAi {
     @Override
     public String[][] play(String[][] board) {
         String[][] b;
-        System.out.println("Making move level \"medium\"");
         //check the horizontals
         for (int i = 0; i < 3; i++) {
             int x = 0;
@@ -115,7 +114,12 @@ public class MediumAi extends EasyAi {
             }
         }
         //this runs if there is no mediumAI move
-        b = super.play(board, 0);//the random move with no print statement
+        b = super.play(board);//the random move with no print statement
         return b;
+    }
+
+    @Override
+    public String toString() {
+        return "Making move level \"medium\"\n";
     }
 }

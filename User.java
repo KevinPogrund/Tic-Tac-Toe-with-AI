@@ -21,7 +21,7 @@ public class User extends Player {
             System.out.print("Enter the coordinates: ");
             int x = s.nextInt();
             int y = s.nextInt();
-            if (x > 3 || y > 3) {//checks the range of the input
+            if (x > 3 || y > 3 || x <= 0 || y <= 0) {//checks the range of the input
                 System.out.println("Coordinates should be from 1 to 3!");
                 int[] loop = getInput(board);
                 return loop;
