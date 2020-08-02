@@ -11,7 +11,7 @@ abstract class Player {
         return b;
     }
 
-    public String checkWinner(String[][] board, String p){
+    public String checkWinner(String[][] board){
         for (int k = 0; k < 3; k++) {
             //check for column
             if (board[0][k].equals(board[1][k]) && board[2][k].equals(board[1][k]) && board[1][k].equals(" ") == false) {

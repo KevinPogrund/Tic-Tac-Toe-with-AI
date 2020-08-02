@@ -27,7 +27,7 @@ public class Main {
 
     public static void playGame() {
         printBoard();
-        String res = player1.checkWinner(board, player1.getType());
+        String res = player1.checkWinner(board);
         switch (res) {
             case "draw":
                 System.out.println("Draw\n");
